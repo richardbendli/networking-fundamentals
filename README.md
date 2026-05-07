@@ -56,3 +56,50 @@ Networks are categorised by geographic coverage:
 > *A PAN is your driveway. A LAN is your street. A CAN is your neighbourhood. A MAN is your city's road network. A WAN is the entire motorway system.*
 
 ---
+
+## 3. The OSI Model — The 7-Layer Framework
+
+The OSI (Open Systems Interconnection) model is a framework that describes how data travels across a network. At beginner level it's a memorisation task. At intermediate level it becomes your primary **diagnostic and troubleshooting tool**.
+
+### The 7 Layers
+
+| Layer | Name | Job | Data Unit | Key Protocols/Devices |
+|---|---|---|---|---|
+| 7 | **Application** | User-facing apps (browser, email) | Data | HTTP, HTTPS, DNS, FTP, SMTP |
+| 6 | **Presentation** | Translates, encrypts, compresses data | Data | TLS/SSL, JPEG, ASCII, MP4 |
+| 5 | **Session** | Starts, maintains, ends conversations | Data | NetBIOS, H.323 |
+| 4 | **Transport** | Reliable/unreliable delivery, uses ports | Segments/Datagrams | TCP, UDP |
+| 3 | **Network** | IP addresses and routing between networks | Packets | IP, ICMP, Routers |
+| 2 | **Data Link** | MAC addresses, delivers data on one hop | Frames | Switches, Ethernet, ARP |
+| 1 | **Physical** | Raw bits — voltage, light, radio waves | Bits | Cables, Hubs, Wi-Fi signals |
+
+**Memory trick (top to bottom):** *"All People Seem To Need Data Processing"*
+→ Application, Presentation, Session, Transport, Network, Data Link, Physical
+
+### Encapsulation & Decapsulation
+
+When data is **sent**, each layer wraps it with a header (encapsulation — going DOWN):
+```
+[App Data]                            ← Layer 7
+[TCP header + Data]       = Segment   ← Layer 4
+[IP header + Segment]     = Packet    ← Layer 3
+[Ethernet header + Packet]= Frame     ← Layer 2
+[Bits on the wire]                    ← Layer 1
+```
+When data is **received**, each layer removes its header (decapsulation — going UP).
+
+> *"Sending a letter." You write it (L7), put it in an envelope (L6), address it (L3), hand it to the post office (L2), it travels physically (L1). The receiver reverses the process.*
+
+### OSI as a Troubleshooting Tool
+
+When something breaks, work layer by layer upward:
+
+| Layer | Question | Example Problem |
+|---|---|---|
+| 1 | Is there a physical signal? | Broken cable, no link light |
+| 2 | Are frames being formed correctly? | MAC table issue, duplex mismatch |
+| 3 | Is the IP/routing correct? | Wrong subnet, missing default gateway |
+| 4 | Is the right port open? | Firewall blocking TCP 443 |
+| 5–7 | Is the application behaving? | DNS failure, expired certificate |
+
+---
