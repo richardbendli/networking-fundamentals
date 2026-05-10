@@ -103,3 +103,61 @@ When something breaks, work layer by layer upward:
 | 5–7 | Is the application behaving? | DNS failure, expired certificate |
 
 ---
+
+## 4. IP Addressing
+
+### IPv4 Basics
+
+Written in **dotted decimal notation**: `192.168.1.10`
+- 32-bit address → ~4.3 billion possible addresses
+- Split into: **Network portion** (which network) + **Host portion** (which device)
+
+### IPv4 Address Classes
+
+| Class | Range | Default Mask | Hosts Per Network |
+|---|---|---|---|
+| A | 1–126 | /8 | ~16 million |
+| B | 128–191 | /16 | ~65,000 |
+| C | 192–223 | /24 | 254 |
+| D | 224–239 | — | Multicast |
+| E | 240–255 | — | Experimental |
+
+> *Classes are mostly obsolete — replaced by CIDR — but you'll still see this terminology in documentation.*
+
+### Private IP Ranges (RFC 1918)
+
+These addresses are used inside homes and offices. They are **never routed on the public internet**.
+
+| Range | Common Use |
+|---|---|
+| `10.0.0.0 – 10.255.255.255` | Large organisations |
+| `172.16.0.0 – 172.31.255.255` | Medium networks |
+| `192.168.0.0 – 192.168.255.255` | Home networks |
+
+### Special Reserved Addresses
+
+| Address | Purpose |
+|---|---|
+| `127.0.0.1` | Loopback — your device talking to itself |
+| `169.254.x.x` | APIPA — auto-assigned when DHCP fails |
+| `0.0.0.0` | Unspecified / default route |
+| `255.255.255.255` | Limited broadcast (all devices on local subnet) |
+
+### IPv6 — Why It Exists
+
+IPv4 only has ~4.3 billion addresses. IPv6 fixes the exhaustion problem:
+- **128-bit addresses** → 340 undecillion addresses
+- Written in **hexadecimal with colons**: `2001:0db8:85a3::8a2e:0370:7334`
+- Shorthand: consecutive zero groups → `::` (used only once per address)
+- **No broadcasts** — more efficient
+- Devices can assign themselves addresses automatically (**SLAAC**)
+
+| Feature | IPv4 | IPv6 |
+|---|---|---|
+| Address length | 32-bit | 128-bit |
+| Notation | Dotted decimal | Hex with colons |
+| Address space | ~4.3 billion | 340 undecillion |
+| Broadcasts | Yes | No (uses multicast) |
+| Auto-configuration | DHCP | SLAAC |
+
+---
