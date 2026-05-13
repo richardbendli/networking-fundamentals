@@ -161,3 +161,46 @@ IPv4 only has ~4.3 billion addresses. IPv6 fixes the exhaustion problem:
 | Auto-configuration | DHCP | SLAAC |
 
 ---
+
+## 5. Subnetting — Dividing a Network
+
+**Subnetting** means splitting one large network into smaller, more manageable pieces.
+
+### Why Subnet?
+- **Security** — isolate departments from each other
+- **Performance** — smaller broadcast domains = less noise
+- **Organisation** — logical groupings match business structure
+- **Efficiency** — assign only the IPs each group needs
+
+### Subnet Mask
+
+Tells your device which part of an IP is the network and which is the host.
+- `/24` = first 24 bits are network → 256 total IPs, 254 usable
+- The smaller the CIDR number, the larger the network
+
+### Subnetting Reference Table
+
+| CIDR | Subnet Mask | Total IPs | Usable IPs |
+|---|---|---|---|
+| /24 | 255.255.255.0 | 256 | 254 |
+| /25 | 255.255.255.128 | 128 | 126 |
+| /26 | 255.255.255.192 | 64 | 62 |
+| /27 | 255.255.255.224 | 32 | 30 |
+| /28 | 255.255.255.240 | 16 | 14 |
+| /29 | 255.255.255.248 | 8 | 6 |
+| /30 | 255.255.255.252 | 4 | 2 |
+
+> *Usable IPs = `2ʰ - 2` (h = host bits; subtract 2 for network address and broadcast address)*
+
+### VLSM — Variable Length Subnet Masking
+
+Real networks have departments of different sizes. VLSM lets you assign right-sized subnets:
+- Sales (50 users) → `/26` (62 usable)
+- HR (10 users) → `/28` (14 usable)
+- WAN link between two routers → `/30` (2 usable — exactly right!)
+
+> *Subnetting is cutting a pizza into slices. VLSM means cutting unequal slices — giving a bigger piece to whoever needs more.*
+
+> **Always** start subnetting from the **largest** requirement and work down to smallest.
+
+---
