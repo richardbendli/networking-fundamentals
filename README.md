@@ -241,3 +241,4 @@ Both operate at **Layer 4 (Transport)** of the OSI model.
 > *TCP is like sending a parcel with a signature required — you know it arrived. UDP is like posting leaflets — fast, no confirmation.*
 
 ---
+
