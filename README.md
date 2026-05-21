@@ -204,3 +204,40 @@ Real networks have departments of different sizes. VLSM lets you assign right-si
 > **Always** start subnetting from the **largest** requirement and work down to smallest.
 
 ---
+
+## 6. TCP vs. UDP — Two Ways to Send Data
+
+Both operate at **Layer 4 (Transport)** of the OSI model.
+
+### TCP — Transmission Control Protocol
+
+- **Connection-oriented** — establishes a connection before sending data
+- **Reliable** — guarantees delivery, sequencing, and error checking
+- **Uses the Three-Way Handshake:**
+  1. **SYN** → "Hello, I want to connect"
+  2. **SYN-ACK** → "Hello back, I'm ready"
+  3. **ACK** → "Great, let's go"
+- **Windowing** — dynamically adjusts how much data is sent at once based on network conditions
+- **Used for:** Web browsing, email, file downloads, anything where data loss is unacceptable
+
+### UDP — User Datagram Protocol
+
+- **Connectionless** — no handshake, just sends
+- **Unreliable** — no delivery guarantee ("fire and forget")
+- **Faster** — less overhead
+- **Used for:** Live video/audio, gaming, VoIP, DNS lookups — where speed matters more than perfection
+
+### TCP vs. UDP Comparison
+
+| Feature | TCP | UDP |
+|---|---|---|
+| Connection | Required (3-way handshake) | Not required |
+| Reliability | Guaranteed | Not guaranteed |
+| Ordering | Yes — sequence numbers | No |
+| Speed | Slower | Faster |
+| Error checking | Yes | Optional |
+| Use cases | Web, email, files | Video, gaming, VoIP |
+
+> *TCP is like sending a parcel with a signature required — you know it arrived. UDP is like posting leaflets — fast, no confirmation.*
+
+---
