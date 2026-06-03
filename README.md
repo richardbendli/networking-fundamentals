@@ -242,3 +242,39 @@ Both operate at **Layer 4 (Transport)** of the OSI model.
 
 ---
 
+## 7. Ports — The Apartment Numbers of the Internet
+
+IP addresses get data to the right **building** (device). Ports direct it to the right **flat** (application).
+
+### Port Ranges
+
+| Range | Name | Description |
+|---|---|---|
+| 0–1,023 | Well-known | Reserved for standard services |
+| 1,024–49,151 | Registered | Assigned to specific applications |
+| 49,152–65,535 | Ephemeral | Temporary ports used by clients for sessions |
+
+### Essential Ports to Know
+
+| Port | Protocol | Service |
+|---|---|---|
+| 20/21 | TCP | FTP (file transfer) |
+| 22 | TCP | SSH (secure remote access) |
+| 23 | TCP | Telnet (unsecure remote — avoid!) |
+| 25 | TCP | SMTP (sending email) |
+| 53 | UDP/TCP | DNS (domain name lookups) |
+| 67/68 | UDP | DHCP (IP assignment) |
+| 69 | UDP | TFTP (trivial file transfer) |
+| 80 | TCP | HTTP (unencrypted web) |
+| 110 | TCP | POP3 (email retrieval) |
+| 123 | UDP | NTP (time synchronisation) |
+| 143 | TCP | IMAP (email retrieval, stays on server) |
+| 161/162 | UDP | SNMP (network monitoring) |
+| 389 | TCP/UDP | LDAP (directory services) |
+| 443 | TCP | HTTPS (encrypted web) |
+| 445 | TCP | SMB (Windows file sharing) |
+| 514 | UDP | Syslog (centralised logging) |
+| 636 | TCP | LDAPS (secure LDAP) |
+| 3389 | TCP | RDP (Windows remote desktop) |
+
+---
