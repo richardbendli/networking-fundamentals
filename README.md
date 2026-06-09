@@ -278,3 +278,63 @@ IP addresses get data to the right **building** (device). Ports direct it to the
 | 3389 | TCP | RDP (Windows remote desktop) |
 
 ---
+
+## 8. DNS — The Internet's Phone Book
+
+DNS translates human-friendly domain names (`www.bbc.co.uk`) into IP addresses (`151.101.0.81`) that computers use.
+
+### Full DNS Resolution Process
+
+1. You type `www.bbc.co.uk` in your browser
+2. Computer checks its **local DNS cache** — not found
+3. Asks your **recursive resolver** (your ISP or Google `8.8.8.8`)
+4. Resolver asks a **Root nameserver** → "who handles `.uk`?"
+5. Root points to `.uk` **TLD nameserver**
+6. TLD points to **`bbc.co.uk` authoritative nameserver**
+7. Authoritative server returns the IP
+8. Resolver caches it (for TTL duration) and returns it to you
+9. Browser connects to that IP
+
+### DNS Record Types
+
+| Record | Purpose | Example |
+|---|---|---|
+| **A** | Hostname → IPv4 | `bbc.co.uk → 151.101.0.81` |
+| **AAAA** | Hostname → IPv6 | `bbc.co.uk → 2a04:4e42::81` |
+| **CNAME** | Alias → another hostname | `www → bbc.co.uk` |
+| **MX** | Mail server for domain | `mail.bbc.co.uk` |
+| **PTR** | IP → hostname (reverse lookup) | `151.101.0.81 → bbc.co.uk` |
+| **NS** | Authoritative nameserver | `ns1.bbc.co.uk` |
+| **TXT** | Arbitrary text (SPF, domain verification) | |
+| **SOA** | Zone authority info | |
+
+**TTL (Time To Live):** How long resolvers cache a DNS record. Short TTL = changes propagate faster but more DNS queries. Long TTL = fewer queries, slower to update.
+
+---
+
+## 9. DHCP — Automatic IP Assignment
+
+**DHCP (Dynamic Host Configuration Protocol)** automatically assigns IP configuration to devices when they join a network.
+
+### The DORA Process
+
+1. **Discover** — Device broadcasts: "Is there a DHCP server? I need an IP!"
+2. **Offer** — Server responds: "Here, take `192.168.1.50`"
+3. **Request** — Device confirms: "Yes please, I'll take that one"
+4. **Acknowledge** — Server confirms: "It's yours for 24 hours"
+
+### What DHCP Assigns
+
+- IP address
+- Subnet mask
+- Default gateway
+- DNS server IP(s)
+- Lease duration
+
+> *DHCP is a hotel receptionist. You arrive (connect), they check you in and assign you a room number (IP). When you leave (disconnect), the room becomes available again.*
+
+**APIPA:** If DHCP fails, Windows automatically assigns `169.254.x.x`. Seeing this address almost always means DHCP is unreachable.
+
+**DHCP Relay:** If devices and the DHCP server are on different subnets, a router needs an **IP Helper Address** to forward broadcast requests across subnet boundaries.
+
+---
